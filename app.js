@@ -29,6 +29,8 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname,"/public")))
 
+
+// const MONGO_URL ="mongodb://127.0.0.1:27017/roomora";
 const db_url = process.env.ATLAS_URI;
 
 main().then(()=>{
@@ -47,7 +49,7 @@ const store = MongoStore.create({
     mongoUrl: db_url,
     touchAfter: 24 * 3600,
     crypto: {
-        secret: process.env.SECRET
+        secret: "mysupersecretcode"
     }
 });
 
