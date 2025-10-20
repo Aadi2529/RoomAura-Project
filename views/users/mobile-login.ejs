@@ -1,0 +1,19 @@
+<%- include("../layouts/boilerplate.ejs") %>
+
+<div class="container mt-5">
+  <% if (success && success.length) { %>
+    <div class="alert alert-success"><%= success[0] %></div>
+  <% } %>
+  <% if (error && error.length) { %>
+    <div class="alert alert-danger"><%= error[0] %></div>
+  <% } %>
+
+  <h2>Login / Sign Up with Mobile</h2>
+  <form action="/mobile-login" method="POST">
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Mobile Number</label>
+      <input type="text" class="form-control" id="mobile" name="mobile" required />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Send OTP</button>
+  </form>
+</div>

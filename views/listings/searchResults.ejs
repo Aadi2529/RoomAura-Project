@@ -1,0 +1,40 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+
+<div class="container my-5">
+  <h3>Search Results for "<%= location %>"</h3>
+  <p><strong>Dates:</strong> <%= checkin %> to <%= checkout %></p>
+  <p><strong>Guests:</strong> <%= guests %></p>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+    <% if (listings.length > 0) { %>
+      <% listings.forEach(listing => { %>
+        <div class="col">
+          <a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+            <div class="card shadow-sm border-0 listing-card h-100">
+              
+              <!-- Listing Image -->
+              <img 
+                src="<%= listing.image.url %>" 
+                class="card-img-top" 
+                alt="listing-image" 
+                style="height: 14rem; object-fit: cover;"
+              >
+
+              <!-- Card Body -->
+              <div class="card-body">
+                <h5 class="card-title mb-1"><%= listing.title %></h5>
+                <p class="card-text text-muted mb-2">
+                  &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> / night
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No listings found for this location.</p>
+    <% } %>
+  </div>
+</div>
+

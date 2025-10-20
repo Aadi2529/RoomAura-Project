@@ -1,0 +1,19 @@
+<%- include("../layouts/boilerplate.ejs") %>
+
+<div class="container mt-5">
+  <% if (success && success.length) { %>
+    <div class="alert alert-success"><%= success[0] %></div>
+  <% } %>
+  <% if (error && error.length) { %>
+    <div class="alert alert-danger"><%= error[0] %></div>
+  <% } %>
+
+  <h2>Verify OTP</h2>
+  <form action="/verify-otp" method="POST">
+    <div class="mb-3">
+      <label for="otp" class="form-label">Enter OTP</label>
+      <input type="text" class="form-control" id="otp" name="otp" required />
+    </div>
+    <button type="submit" class="btn btn-success w-100">Verify OTP</button>
+  </form>
+</div>

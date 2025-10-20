@@ -1,0 +1,101 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <div class="navbar-nav">
+
+      
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">Be a Host</a>
+        </li>
+      </ul>
+      </div>
+    <div class="navbar-nav ms-auto position-relative">
+      <form class="search-bar d-flex align-items-center" id="mainSearchForm" action="/search" method="GET">
+        <!-- Where -->
+        <div class="search-section border-end px-3 position-relative" id="whereSection">
+          <label class="small mb-0 text-muted">Where</label>
+          <input type="text" id="locationInput" class="form-control border-0 shadow-none p-0" placeholder="Search destinations" name="location" autocomplete="off">
+          
+          <!-- Dropdown Suggestion Box -->
+          <div class="dropdown-box bg-white shadow p-3 rounded-4 mt-2" id="suggestionsBox" style="display:none;">
+            <p class="fw-semibold mb-2">Suggested destinations</p>
+            <div class="suggestion-item py-2 px-2 rounded-3" data-value="Lonavala, Maharashtra">
+              <i class="fa-solid fa-mountain-sun me-2 text-danger"></i> Lonavala, Maharashtra<br>
+              <small class="text-muted">For sights like Karla Caves</small>
+            </div>
+            <div class="suggestion-item py-2 px-2 rounded-3" data-value="North Goa, Goa">
+              <i class="fa-solid fa-umbrella-beach me-2 text-warning"></i> North Goa, Goa<br>
+              <small class="text-muted">Popular beach destination</small>
+            </div>
+            <div class="suggestion-item py-2 px-2 rounded-3" data-value="Pune City, Maharashtra">
+              <i class="fa-solid fa-city me-2 text-primary"></i> Pune City, Maharashtra<br>
+              <small class="text-muted">For sights like Dagdusheth Temple</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Check In -->
+        <div class="search-section border-end px-3 position-relative">
+          <label class="small mb-0 text-muted">Check in</label>
+          <input type="text" id="checkinInput" class="form-control border-0 shadow-none p-0" placeholder="Add dates" name="checkin">
+        </div>
+
+        <!-- Check Out -->
+        <div class="search-section border-end px-3 position-relative">
+          <label class="small mb-0 text-muted">Check out</label>
+          <input type="text" id="checkoutInput" class="form-control border-0 shadow-none p-0" placeholder="Add dates" name="checkout">
+        </div>
+
+        <!-- Who -->
+        <div class="search-section px-3 position-relative" id="whoSection">
+          <label class="small mb-0 text-muted">Who</label>
+          <input type="text" id="guestsInput" class="form-control border-0 shadow-none p-0" placeholder="Add guests" readonly>
+          
+          <!-- Guests Dropdown -->
+          <div class="dropdown-box bg-white shadow p-3 rounded-4 mt-2" id="guestsDropdown" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span>Adults</span>
+              <div>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="updateGuests(-1)">-</button>
+                <span id="guestCount" class="mx-2">1</span>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="updateGuests(1)">+</button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span>Child</span>
+              <div>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="updateGuests(-1)">-</button>
+                <span id="guestCount" class="mx-2">1</span>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="updateGuests(1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <button class="btn btn-danger rounded-circle ms-2" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+
+      <div class="navbar-nav me-auto ms-3">
+        <% if(!currentUser) { %>
+          <a class="nav-link" href="/signup">Sign Up</a>
+          <a class="nav-link" href="/login">Login</a>
+        <% } else { %>
+          <span class="nav-link">Hello, <%= currentUser.username %></span>
+          <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
