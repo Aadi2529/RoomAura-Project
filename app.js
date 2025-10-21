@@ -90,9 +90,34 @@ app.use((req,res,next) =>{
     next();
 });
 
+
+
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+
+
+
+// Index Route
+app.use("/", async (req,res) =>{
+        let allListings = await Listing.find({});
+
+      const { location } = req.query; // get the search value from query string
+
+  let listings;
+
+  if (location) {
+    // Search listings where location matches user input (case-insensitive)
+    listings = await Listing.find({
+      location: { $regex: location, $options: "i" },
+    });
+  } else {
+    // If no location filter, show all listings
+    listings = await Listing.find({});
+  }
+    res.render("listings/index", { allListings });
+
+});
 
 
 // 🔍 Search Route (Step 5)
