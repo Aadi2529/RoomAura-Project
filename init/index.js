@@ -20,7 +20,7 @@ const seedDB = async () => {
 
   const listings = initData.data.map((obj) => ({
     ...obj,
-    owner: "68f63877a895ae9cb1630602" // Replace with your actual user ID
+    owner: "68f7a8ca3614a71d77a40faf" // Replace with your actual user ID
   }));
 
   await Listing.insertMany(listings);
