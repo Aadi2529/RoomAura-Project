@@ -1,29 +1,33 @@
-const mongoose = require("mongoose");
-const initData = require("./data.js");
-const Listing = require("../models/listing.js");
-
-// const MONGO_URL = "mongodb://127.0.0.1:27017/roomora";
-const MONGO_URL = process.env.ATLAS_URI;
-
-main()
-  .then(() => {
-    console.log("connected to DB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-async function main() {
-  await mongoose.connect(MONGO_URL);
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({ path: "../.env" });
 }
 
-const initDB = async () => {
+const mongoose = require("mongoose");
+const Listing = require("../models/listing.js");
+const initData = require("./data.js");
+
+const db_url = process.env.ATLAS_URL;
+
+async function main() {
+  console.log("Data INIT");
+  await mongoose.connect(db_url);
+  console.log("✅ Connected to MongoDB Atlas");
+}
+
+const seedDB = async () => {
   await Listing.deleteMany({});
+  console.log("🗑️ Deleted old listings");
+
   const listings = initData.data.map((obj) => ({
-    ...obj, owner: "68f63877a895ae9cb1630602",
+    ...obj,
+    owner: "68f63877a895ae9cb1630602" // Replace with your actual user ID
   }));
+
   await Listing.insertMany(listings);
-  console.log("data was initialized");
+  console.log("🌱 Data inserted successfully!");
 };
 
-initDB();
+main()
+  .then(() => seedDB())
+  .then(() => mongoose.connection.close())
+  .catch((err) => console.log("❌ Error:", err));
